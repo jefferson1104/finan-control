@@ -1,6 +1,4 @@
-export default function Transactions() {
+export default function TransactionsPage() {
   // Renders
-  return (
-    <h1>Transactions Page</h1>
-  )
+  return <h1>Transactions Page</h1>;
 }
