@@ -11,9 +11,9 @@ npx prisma init
 npx prisma format
 
 # run migration to connect and apply database schema in your database
-npx prisma migrate dev --name init_db
+npx prisma migrate dev --name MIGRATION_NAME
 
-# apply migration created on local database
+# apply migration created in database
 npx prisma migrate dev
 ```
 
