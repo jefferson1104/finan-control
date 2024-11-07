@@ -21,14 +21,14 @@ export default async function LoginPage() {
           className="mb-8"
           src="/images/logo.svg"
           alt="Finan Control"
-          width={173}
-          height={39}
+          width={253}
+          height={119}
         />
         <h1 className="mb-3 text-4xl font-bold">Welcome</h1>
         <p className="mb-8 text-muted-foreground">
-          Finance AI is a financial management platform that uses AI to monitor
-          your transactions and offer personalized insights, making it easier to
-          control your budget.
+          Finan Control is a financial management platform that uses AI to
+          monitor your transactions and offer personalized insights, making it
+          easier to control your budget.
         </p>
         <SignInButton>
           <Button variant="outline">
