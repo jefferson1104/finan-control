@@ -12,6 +12,9 @@ npx prisma format
 
 # run migration to connect and apply database schema in your database
 npx prisma migrate dev --name init_db
+
+# apply migration created on local database
+npx prisma migrate dev
 ```
 
 # Husky
