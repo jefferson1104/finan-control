@@ -1,7 +1,10 @@
 import { ArrowDownUpIcon } from "lucide-react";
-import { Button } from "../_components/ui/button";
-import { db } from "../_lib/prisma";
-import { DataTable } from "../_components/ui/data-table";
+
+import { db } from "@/app/_lib/prisma";
+
+import { Button } from "@/app/_components/ui/button";
+import { DataTable } from "@/app/_components/ui/data-table";
+
 import { transactionColumns } from "./_columns";
 
 export default async function TransactionsPage() {
