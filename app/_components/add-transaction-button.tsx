@@ -1,8 +1,11 @@
 "use client";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowDownUpIcon } from "lucide-react";
+
+import { addTransaction } from "../_actions/add-transaction";
 
 import {
   TransactionCategory,
@@ -10,8 +13,16 @@ import {
   TransactionType,
 } from "@prisma/client";
 
+import {
+  PAYMENT_METHOD_OPTIONS,
+  TRANSACTION_CATEGORY_OPTIONS,
+  TRANSACTION_TYPE_OPTIONS,
+} from "../_utils/transaction";
+
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { MoneyInput } from "./money-input";
+import { DatePicker } from "./ui/date-picker";
 import {
   Select,
   SelectContent,
@@ -29,26 +40,21 @@ import {
 } from "./ui/form";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTrigger,
 } from "./ui/dialog";
-import { MoneyInput } from "./money-input";
-import {
-  PAYMENT_METHOD_OPTIONS,
-  TRANSACTION_CATEGORY_OPTIONS,
-  TRANSACTION_TYPE_OPTIONS,
-} from "../_utils/transaction";
-import { DatePicker } from "./ui/date-picker";
-import { DialogClose } from "@radix-ui/react-dialog";
 
 type FormSchema = z.infer<typeof formSchema>;
 
 const formSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }),
-  amount: z.string().trim().min(1, { message: "Amount is required" }),
+  amount: z
+    .number({ required_error: "Amount is required" })
+    .positive({ message: "Amount must be positive" }),
   type: z.nativeEnum(TransactionType, { required_error: "Type is required" }),
   category: z.nativeEnum(TransactionCategory, {
     required_error: "Category is required",
@@ -65,7 +71,7 @@ export default function AddTransactionButton() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      amount: "",
+      amount: 0,
       type: TransactionType.EXPENSE,
       category: TransactionCategory.OTHER,
       paymentMethod: TransactionPaymentMethod.CASH,
@@ -73,15 +79,26 @@ export default function AddTransactionButton() {
     },
   });
 
+  // State
+  const [dialogIsOpen, setDialogIsOpen] = useState(false);
+
   // Methods
-  const onSubmit = (data: FormSchema) => {
-    console.log("DATA", data);
+  const onSubmit = async (data: FormSchema) => {
+    try {
+      await addTransaction(data);
+      setDialogIsOpen(false);
+      form.reset();
+    } catch (error) {
+      console.error("Failed to add transaction", error);
+    }
   };
 
   // Renders
   return (
     <Dialog
+      open={dialogIsOpen}
       onOpenChange={(open) => {
+        setDialogIsOpen(open);
         if (!open) {
           form.reset();
         }
@@ -122,7 +139,11 @@ export default function AddTransactionButton() {
                   <FormControl>
                     <MoneyInput
                       placeholder="Type transaction value"
-                      {...field}
+                      onBlur={field.onBlur}
+                      disabled={field.disabled}
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
                     />
                   </FormControl>
                   <FormMessage />
