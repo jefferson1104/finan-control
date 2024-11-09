@@ -3,7 +3,7 @@ import { db } from "@/app/_lib/prisma";
 import { DataTable } from "@/app/_components/ui/data-table";
 
 import { transactionColumns } from "./_columns";
-import AddTransactionButton from "../_components/add-transaction-button";
+import { AddTransactionButton } from "../_components/add-transaction-button";
 
 export default async function TransactionsPage() {
   // Constants
