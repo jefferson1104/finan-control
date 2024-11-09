@@ -6,13 +6,13 @@ import { Button } from "@/app/_components/ui/button";
 import { TransactionFormDialog } from "@/app/_components/transaction-form-dialog";
 import { Transaction } from "@prisma/client";
 
-interface ActionsTransactionButtonProps {
+interface EditTransactionButtonProps {
   transaction: Transaction;
 }
 
-export function ActionsTransactionButton({
+export function EditTransactionButton({
   transaction,
-}: ActionsTransactionButtonProps) {
+}: EditTransactionButtonProps) {
   // State
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
 

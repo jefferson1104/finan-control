@@ -12,7 +12,7 @@ import {
 
 import { TransactionBadge } from "@/app/_components/transaction-badge";
 import { Button } from "@/app/_components/ui/button";
-import { ActionsTransactionButton } from "@/app/_components/actions-transaction.button";
+import { EditTransactionButton } from "@/app/_components/edit-transaction.button";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -56,7 +56,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     cell: ({ row: { original: transaction } }) => {
       return (
         <div className="space-x-1">
-          <ActionsTransactionButton transaction={transaction} />
+          <EditTransactionButton transaction={transaction} />
           <Button variant="ghost" size="icon" className="text-muted-foreground">
             <TrashIcon />
           </Button>
