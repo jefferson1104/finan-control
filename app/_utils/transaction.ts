@@ -46,6 +46,16 @@ export const TRANSACTION_PAYMENT_METHOD_LABELS = {
   OTHER: "Other",
 };
 
+export const TRANSACTION_PAYMENT_METHOD_ICONS = {
+  [TransactionPaymentMethod.BANK_TRANSFER]: "bank-transfer.svg",
+  [TransactionPaymentMethod.BANK_SLIP]: "bank-slip.svg",
+  [TransactionPaymentMethod.CASH]: "money.svg",
+  [TransactionPaymentMethod.CREDIT_CARD]: "credit-card.svg",
+  [TransactionPaymentMethod.DEBIT_CARD]: "debit-card.svg",
+  [TransactionPaymentMethod.PIX]: "pix.svg",
+  [TransactionPaymentMethod.OTHER]: "other.svg",
+};
+
 export const TRANSACTION_TYPE_OPTIONS = [
   { label: "Expense", value: TransactionType.EXPENSE },
   { label: "Deposit", value: TransactionType.DEPOSIT },
@@ -140,6 +150,16 @@ export const dateToLocaleString = (date: Date, locale: string) => {
   return new Date(date).toLocaleString(locale, {
     day: "2-digit",
     month: "long",
+    year: "numeric",
+  });
+};
+
+export const shortDateToLocaleString = (date: Date, locale: string) => {
+  if (!date) return "-";
+
+  return new Date(date).toLocaleString(locale, {
+    day: "2-digit",
+    month: "short",
     year: "numeric",
   });
 };

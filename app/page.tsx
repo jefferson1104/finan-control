@@ -9,6 +9,7 @@ import { SummaryCards } from "@/app/_components/summary-cards";
 import { TimeSelect } from "@/app/_components/time-select";
 import { TransactionsPieChart } from "@/app/_components/transactions-pie-chart";
 import { TransactionExpensesByCategory } from "./_components/transaction-expenses-by-category";
+import { LastTransactions } from "./_components/last-transactions";
 
 interface HomeProps {
   searchParams: { month: string };
@@ -39,7 +40,7 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
           <TimeSelect />
         </div>
 
-        <div className="grid grid-cols-[2fr,1fr]">
+        <div className="grid grid-cols-[2fr,1fr] gap-6">
           <div className="flex flex-col gap-6">
             <SummaryCards
               balance={dashboardData.balance}
@@ -55,6 +56,7 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
               />
             </div>
           </div>
+          <LastTransactions lastTransactions={dashboardData.lastTransactions} />
         </div>
       </div>
     </>

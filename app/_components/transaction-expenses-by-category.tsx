@@ -1,11 +1,13 @@
-import { ITotalExpenseCategory } from "../_actions/get-transactions-summary/types";
+import { ITotalExpenseCategory } from "@/app/_actions/get-transactions-summary/types";
+
 import {
   formatCurrency,
   TRANSACTION_CATEGORY_LABELS,
-} from "../_utils/transaction";
-import { CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Progress } from "./ui/progress";
-import { ScrollArea } from "./ui/scroll-area";
+} from "@/app/_utils/transaction";
+
+import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
+import { Progress } from "@/app/_components/ui/progress";
+import { ScrollArea } from "@/app/_components/ui/scroll-area";
 
 interface TransactionExpensesByCategoryProps {
   expensesByCategory: ITotalExpenseCategory[];
