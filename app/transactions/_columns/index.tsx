@@ -48,7 +48,11 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "amount",
     header: "Amount",
     cell: ({ row: { original: transaction } }) =>
-      formatCurrency(Number(transaction.amount), "en-US", "USD"),
+      formatCurrency({
+        amount: Number(transaction.amount),
+        locale: "en-US",
+        currency: "USD",
+      }),
   },
   {
     accessorKey: "actions",

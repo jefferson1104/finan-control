@@ -144,11 +144,16 @@ export const dateToLocaleString = (date: Date, locale: string) => {
   });
 };
 
-export const formatCurrency = (
-  amount: number,
-  locale: string,
-  currency: string,
-) => {
+interface TransactionCurrencyProps {
+  amount: number;
+  locale?: "pt-BR" | "en-US";
+  currency?: "BRL" | "USD";
+}
+export const formatCurrency = ({
+  amount,
+  locale = "en-US",
+  currency = "USD",
+}: TransactionCurrencyProps) => {
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
