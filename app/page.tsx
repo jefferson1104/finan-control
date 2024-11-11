@@ -2,9 +2,12 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { isMatch } from "date-fns";
 
+import { getTransactionsSummary } from "@/app/_actions/get-transactions-summary";
+
 import { Navbar } from "@/app/_components/navbar";
 import { SummaryCards } from "@/app/_components/summary-cards";
 import { TimeSelect } from "@/app/_components/time-select";
+import { TransactionsPieChart } from "@/app/_components/transactions-pie-chart";
 
 interface HomeProps {
   searchParams: { month: string };
@@ -15,13 +18,17 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
   const { userId } = auth();
   const monthIsInvalid = !month || !isMatch(month, "MM");
 
-  // Renders
+  // Utils
   if (!userId) {
     redirect("/login");
   }
   if (monthIsInvalid) {
     redirect("/?month=01");
   }
+
+  const dashboardData = await getTransactionsSummary(month, userId);
+
+  // Renders
   return (
     <>
       <Navbar />
@@ -30,8 +37,20 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <TimeSelect />
         </div>
+
         <div className="grid grid-cols-[2fr,1fr]">
-          <SummaryCards month={month} />
+          <div className="flex flex-col gap-6">
+            <SummaryCards
+              balance={dashboardData.balance}
+              depositsTotal={dashboardData.depositsTotal}
+              investmentsTotal={dashboardData.investmentsTotal}
+              expensesTotal={dashboardData.expensesTotal}
+            />
+
+            <div className="grid grid-cols-3 grid-rows-1 gap-6">
+              <TransactionsPieChart {...dashboardData} />
+            </div>
+          </div>
         </div>
       </div>
     </>
