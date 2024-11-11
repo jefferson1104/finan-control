@@ -8,6 +8,7 @@ import { Navbar } from "@/app/_components/navbar";
 import { SummaryCards } from "@/app/_components/summary-cards";
 import { TimeSelect } from "@/app/_components/time-select";
 import { TransactionsPieChart } from "@/app/_components/transactions-pie-chart";
+import { TransactionExpensesByCategory } from "./_components/transaction-expenses-by-category";
 
 interface HomeProps {
   searchParams: { month: string };
@@ -49,6 +50,9 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
 
             <div className="grid grid-cols-3 grid-rows-1 gap-6">
               <TransactionsPieChart {...dashboardData} />
+              <TransactionExpensesByCategory
+                expensesByCategory={dashboardData.totalExpensesByCategory}
+              />
             </div>
           </div>
         </div>
