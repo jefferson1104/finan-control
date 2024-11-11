@@ -1,6 +1,15 @@
-import { Navbar } from "../_components/navbar";
+import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
-export default function SubscriptionPage() {
+import { Navbar } from "@/app/_components/navbar";
+
+export default async function SubscriptionPage() {
+  // Constants
+  const { userId } = await auth();
+
   // Renders
+  if (!userId) {
+    redirect("/login");
+  }
   return <Navbar />;
 }

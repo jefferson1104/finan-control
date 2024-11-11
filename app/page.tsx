@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Navbar } from "@/app/_components/navbar";
 
 export default async function Home() {
-  // Hooks
+  // Constants
   const { userId } = auth();
 
   // Renders
