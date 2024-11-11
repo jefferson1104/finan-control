@@ -10,12 +10,19 @@ interface SummaryCardProps {
   title: string;
   amount: number;
   size: "small" | "large";
+  isOpacityBackground?: boolean;
 }
 
-export function SummaryCard({ icon, title, amount, size }: SummaryCardProps) {
+export function SummaryCard({
+  icon,
+  title,
+  amount,
+  size,
+  isOpacityBackground = false,
+}: SummaryCardProps) {
   // Renders
   return (
-    <Card>
+    <Card className={`${isOpacityBackground ? "bg-white bg-opacity-5" : ""}`}>
       <CardHeader className="flex-row items-center gap-4">
         {icon}
         <p

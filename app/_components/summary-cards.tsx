@@ -53,32 +53,50 @@ export async function SummaryCards({ month }: SummaryCardsProps) {
   return (
     <div className="space-y-6">
       <SummaryCard
-        icon={<WalletIcon size={16} />}
         title="Balance"
         amount={balance}
         size="large"
+        isOpacityBackground
+        icon={
+          <div className="rounded-md bg-background p-2">
+            <WalletIcon size={16} />
+          </div>
+        }
       />
 
       <div className="grid grid-cols-3 gap-6">
         <SummaryCard
-          icon={<PiggyBankIcon size={16} />}
           title="Investments"
           amount={investmentsTotal}
           size="small"
+          isOpacityBackground
+          icon={
+            <div className="rounded-md bg-background p-1">
+              <PiggyBankIcon size={16} />{" "}
+            </div>
+          }
         />
 
         <SummaryCard
-          icon={<TrendingUpIcon size={16} className="text-primary" />}
           title="Income"
           amount={depositsTotal}
           size="small"
+          icon={
+            <div className="rounded-md bg-green-500 bg-opacity-10 p-1">
+              <TrendingUpIcon size={16} className="text-primary" />
+            </div>
+          }
         />
 
         <SummaryCard
-          icon={<TrendingDownIcon size={16} className="text-red-500" />}
           title="Expenses"
           amount={expensesTotal}
           size="small"
+          icon={
+            <div className="rounded-md bg-red-500 bg-opacity-10 p-1">
+              <TrendingDownIcon size={16} className="text-red-500" />
+            </div>
+          }
         />
       </div>
     </div>
