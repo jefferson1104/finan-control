@@ -8,8 +8,8 @@ import { Navbar } from "@/app/_components/navbar";
 import { SummaryCards } from "@/app/_components/summary-cards";
 import { TimeSelect } from "@/app/_components/time-select";
 import { TransactionsPieChart } from "@/app/_components/transactions-pie-chart";
-import { TransactionExpensesByCategory } from "./_components/transaction-expenses-by-category";
-import { LastTransactions } from "./_components/last-transactions";
+import { TransactionExpensesByCategory } from "@/app/_components/transaction-expenses-by-category";
+import { LastTransactions } from "@/app/_components/last-transactions";
 
 interface HomeProps {
   searchParams: { month: string };

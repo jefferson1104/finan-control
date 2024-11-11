@@ -2,14 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { Transaction } from "@prisma/client";
 
-import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
-import { ScrollArea } from "@/app/_components/ui/scroll-area";
-import { Button } from "@/app/_components/ui/button";
 import {
   formatCurrency,
   shortDateToLocaleString,
   TRANSACTION_PAYMENT_METHOD_ICONS,
-} from "../_utils/transaction";
+} from "@/app/_utils/transaction";
+
+import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
+import { ScrollArea } from "@/app/_components/ui/scroll-area";
+import { Button } from "@/app/_components/ui/button";
 
 interface LastTransactionsProps {
   lastTransactions: Transaction[];
