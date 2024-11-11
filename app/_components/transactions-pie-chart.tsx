@@ -64,7 +64,7 @@ export function TransactionsPieChart({
 
   // Renders
   return (
-    <Card className="flex flex-col p-12">
+    <Card className="flex flex-col p-6">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
@@ -89,7 +89,7 @@ export function TransactionsPieChart({
             title="Income"
             value={transactionsTypePercentage[TransactionType.DEPOSIT]}
             icon={
-              <div className="rounded-md bg-green-500 bg-opacity-10 p-1">
+              <div className="rounded-md bg-green-500 bg-opacity-10 p-2">
                 <TrendingUpIcon size={16} className="text-primary" />
               </div>
             }
@@ -98,7 +98,7 @@ export function TransactionsPieChart({
             title="Expenses"
             value={transactionsTypePercentage[TransactionType.EXPENSE]}
             icon={
-              <div className="rounded-md bg-red-500 bg-opacity-10 p-1">
+              <div className="rounded-md bg-red-500 bg-opacity-10 p-2">
                 <TrendingDownIcon size={16} className="text-red-500" />
               </div>
             }
@@ -107,7 +107,7 @@ export function TransactionsPieChart({
             title="Investments"
             value={transactionsTypePercentage[TransactionType.INVESTMENT]}
             icon={
-              <div className="rounded-md bg-white bg-opacity-5 p-1">
+              <div className="rounded-md bg-white bg-opacity-5 p-2">
                 <PiggyBankIcon size={16} />{" "}
               </div>
             }

@@ -42,7 +42,7 @@ export async function SummaryCards({
           size="small"
           isOpacityBackground
           icon={
-            <div className="rounded-md bg-background p-1">
+            <div className="rounded-md bg-background p-2">
               <PiggyBankIcon size={16} />{" "}
             </div>
           }
@@ -53,7 +53,7 @@ export async function SummaryCards({
           amount={depositsTotal}
           size="small"
           icon={
-            <div className="rounded-md bg-green-500 bg-opacity-10 p-1">
+            <div className="rounded-md bg-green-500 bg-opacity-10 p-2">
               <TrendingUpIcon size={16} className="text-primary" />
             </div>
           }
@@ -64,7 +64,7 @@ export async function SummaryCards({
           amount={expensesTotal}
           size="small"
           icon={
-            <div className="rounded-md bg-red-500 bg-opacity-10 p-1">
+            <div className="rounded-md bg-red-500 bg-opacity-10 p-2">
               <TrendingDownIcon size={16} className="text-red-500" />
             </div>
           }

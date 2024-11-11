@@ -14,7 +14,7 @@ export function TransactionPercentageItem({
   // Renders
   return (
     <div className="flex items-center justify-between">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         {icon}
         <p className="text-sm text-muted-foreground">{title}</p>
       </div>
