@@ -1,4 +1,5 @@
-import { useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -113,6 +114,13 @@ export function TransactionFormDialog({
       setIsLoading(false);
     }
   };
+
+  // Effects
+  useEffect(() => {
+    if (defaultValues) {
+      form.reset(defaultValues);
+    }
+  }, [defaultValues, form]);
 
   // Renders
   return (

@@ -22,7 +22,9 @@ interface DatePickerProps {
 
 export function DatePicker({ value, onChange }: DatePickerProps) {
   // Constants
-  const dateValue = dateToLocaleString(value, "en-US");
+  const dateValue = value
+    ? dateToLocaleString(new Date(value), "en-US")
+    : dateToLocaleString(new Date(), "en-US");
 
   // Renders
   return (
@@ -42,7 +44,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={value}
+          selected={new Date(value)}
           onSelect={onChange}
           initialFocus
           locale={enUS}
