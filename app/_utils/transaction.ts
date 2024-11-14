@@ -5,55 +5,45 @@ import {
 } from "@prisma/client";
 
 export const TRANSACTION_CATEGORY_LABELS = {
+  CREDIT_CARD: "Credit Card",
+  CRYPTO: "Crypto",
   EDUCATION: "Education",
   ENTERTAINMENT: "Entertainment",
   FOOD: "Food",
-  GROCERIES: "Groceries",
   HEALTH: "Health",
   HOUSING: "Housing",
-  INSURANCE: "Insurance",
   INVESTMENTS: "Investments",
+  LOAN: "Loan",
   OTHER: "Other",
-  SHOPPING: "Shopping",
+  SALARY: "Salary",
+  TAXES: "Taxes",
   TRANSPORTATION: "Transportation",
   TRAVEL: "Travel",
-  SALARY: "Salary",
-  REFUND: "Refund",
-  GIFT: "Gift",
   UTILITY: "Utility",
-  TAX: "Tax",
 };
 
 export const TRANSACTION_PAYMENT_METHOD_LABELS = {
-  BANK_TRANSFER: "Bank Transfer",
   BANK_SLIP: "Bank Slip",
+  BANK_TRANSFER: "Bank Transfer",
   CASH: "Cash",
   CREDIT_CARD: "Credit Card",
   DEBIT_CARD: "Debit Card",
-  PIX: "Pix",
-  PAYPAL: "PayPal",
-  ZELLE: "Zelle",
-  VENMO: "Venmo",
-  APPLE_PAY: "Apple Pay",
-  GOOGLE_PAY: "Google Pay",
-  SAMSUNG_PAY: "Samsung Pay",
-  BITCOIN: "Bitcoin",
-  ETHEREUM: "Ethereum",
-  LITECOIN: "Litecoin",
-  DOGECOIN: "Dogecoin",
-  SHIBA_INU: "Shiba Inu",
-  SAFEMOON: "SafeMoon",
   OTHER: "Other",
+  PIX: "Pix",
+  VENMO: "Venmo",
+  ZELLE: "Zelle",
 };
 
 export const TRANSACTION_PAYMENT_METHOD_ICONS = {
-  [TransactionPaymentMethod.BANK_TRANSFER]: "bank-transfer.svg",
   [TransactionPaymentMethod.BANK_SLIP]: "bank-slip.svg",
+  [TransactionPaymentMethod.BANK_TRANSFER]: "bank-transfer.svg",
   [TransactionPaymentMethod.CASH]: "money.svg",
   [TransactionPaymentMethod.CREDIT_CARD]: "credit-card.svg",
   [TransactionPaymentMethod.DEBIT_CARD]: "debit-card.svg",
-  [TransactionPaymentMethod.PIX]: "pix.svg",
   [TransactionPaymentMethod.OTHER]: "other.svg",
+  [TransactionPaymentMethod.PIX]: "pix.svg",
+  [TransactionPaymentMethod.VENMO]: "venmo.svg",
+  [TransactionPaymentMethod.ZELLE]: "zelle.svg",
 };
 
 export const TRANSACTION_TYPE_OPTIONS = [

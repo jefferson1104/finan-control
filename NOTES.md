@@ -10,7 +10,7 @@ npx prisma init
 # format schema file
 npx prisma format
 
-# run migration to connect and apply database schema in your database
+# run to create a new migration
 npx prisma migrate dev --name MIGRATION_NAME
 
 # apply migration created in database development mode
