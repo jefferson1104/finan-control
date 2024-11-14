@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderCircle } from "lucide-react";
 
 import {
   TransactionCategory,
@@ -87,17 +89,23 @@ export function TransactionFormDialog({
     },
   });
 
+  // States
+  const [isLoading, setIsLoading] = useState(false);
+
   // Constants
   const isUpdate = Boolean(transactionId);
 
   // Methods
   const onSubmit = async (data: FormSchema) => {
     try {
+      setIsLoading(true);
       await upsertTransaction({ ...data, id: transactionId });
       setIsOpen(false);
       form.reset();
     } catch (error) {
       console.error("Failed to update/create transaction", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -253,11 +261,16 @@ export function TransactionFormDialog({
 
             <DialogFooter>
               <DialogClose asChild>
-                <Button type="button" variant="outline">
+                <Button disabled={isLoading} type="button" variant="outline">
                   Cancel
                 </Button>
               </DialogClose>
-              <Button type="submit">{isUpdate ? "Update" : "Save"}</Button>
+              <Button disabled={isLoading} type="submit">
+                {isUpdate ? "Update" : isLoading ? "Loading..." : "Create"}
+                {isLoading && (
+                  <LoaderCircle className="animate-spin text-white" />
+                )}
+              </Button>
             </DialogFooter>
           </form>
         </Form>

@@ -20,7 +20,7 @@ export function TransactionExpensesByCategory({
   return (
     <ScrollArea className="col-span-2 h-full rounded-md border pb-6">
       <CardHeader>
-        <CardTitle>Expenses by Category</CardTitle>
+        <CardTitle>Expenses by categories</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-6">
