@@ -50,7 +50,9 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
             />
 
             <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
-              <TransactionsPieChart {...dashboardData} />
+              <TransactionsPieChart
+                {...JSON.parse(JSON.stringify(dashboardData))}
+              />
               <TransactionExpensesByCategory
                 expensesByCategory={dashboardData.totalExpensesByCategory}
               />

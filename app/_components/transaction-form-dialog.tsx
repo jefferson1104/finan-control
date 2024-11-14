@@ -94,7 +94,6 @@ export function TransactionFormDialog({
   const onSubmit = async (data: FormSchema) => {
     try {
       await upsertTransaction({ ...data, id: transactionId });
-      console.log("passou aqui", data);
       setIsOpen(false);
       form.reset();
     } catch (error) {
