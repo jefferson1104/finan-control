@@ -45,6 +45,7 @@ import {
   DialogFooter,
   DialogHeader,
 } from "@/app/_components/ui/dialog";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }),
@@ -102,8 +103,12 @@ export function TransactionFormDialog({
       await upsertTransaction({ ...data, id: transactionId });
       setIsOpen(false);
       form.reset();
+      toast.success(
+        `${isUpdate ? "Updated" : "Created"} transaction successfully.`,
+      );
     } catch (error) {
       console.error("Failed to update/create transaction", error);
+      toast.error("Failed to update/create transaction. Please try again.");
     } finally {
       setIsLoading(false);
     }

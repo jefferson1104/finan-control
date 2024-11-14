@@ -1,9 +1,10 @@
+"use server";
 import { TransactionType } from "@prisma/client";
+import { auth } from "@clerk/nextjs/server";
 
 import { db } from "@/app/_lib/prisma";
 
 import { ITotalExpenseCategory, TTransactionTypePercentage } from "./types";
-import { auth } from "@clerk/nextjs/server";
 
 export const getTransactionsSummary = async (month: string) => {
   const { userId } = await auth();
