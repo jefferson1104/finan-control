@@ -13,8 +13,11 @@ npx prisma format
 # run migration to connect and apply database schema in your database
 npx prisma migrate dev --name MIGRATION_NAME
 
-# apply migration created in database
+# apply migration created in database development mode
 npx prisma migrate dev
+
+# apply migration created in database production mode
+npx prisma migrate deploy
 ```
 
 # Husky
