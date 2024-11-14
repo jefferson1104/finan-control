@@ -41,7 +41,7 @@ export function Navbar() {
           >
             Transactions
           </Link>
-          <Link
+          {/* <Link
             href="/subscription"
             className={
               pathname === "/subscription"
@@ -50,7 +50,7 @@ export function Navbar() {
             }
           >
             Subscription
-          </Link>
+          </Link> */}
         </div>
       </div>
       <UserButton showName />
