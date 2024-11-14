@@ -8,6 +8,7 @@ import { TTransactionTypePercentage } from "@/app/_actions/get-transactions-summ
 import { TransactionPercentageItem } from "./transaction-percentage-item";
 
 import { Card, CardContent } from "@/app/_components/ui/card";
+import { EmptyState } from "@/app/_components/empty-state";
 import {
   ChartConfig,
   ChartContainer,
@@ -43,6 +44,10 @@ export function TransactionsPieChart({
   expensesTotal,
   transactionsTypePercentage,
 }: TransactionsPieChartProps) {
+  // Constants
+  const hasTransactions =
+    !!depositsTotal || !!investmentsTotal || !!expensesTotal;
+
   // Utils
   const chartData = [
     {
@@ -64,56 +69,62 @@ export function TransactionsPieChart({
 
   // Renders
   return (
-    <Card className="flex flex-col p-6">
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
-        >
-          <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Pie
-              data={chartData}
-              dataKey="amount"
-              nameKey="type"
-              innerRadius={60}
-            />
-          </PieChart>
-        </ChartContainer>
+    <Card className="flex flex-col">
+      {!hasTransactions && <EmptyState />}
 
-        <div className="space-y-2">
-          <TransactionPercentageItem
-            title="Income"
-            value={transactionsTypePercentage[TransactionType.DEPOSIT]}
-            icon={
-              <div className="rounded-md bg-green-500 bg-opacity-10 p-2">
-                <TrendingUpIcon size={16} className="text-primary" />
-              </div>
-            }
-          />
-          <TransactionPercentageItem
-            title="Expenses"
-            value={transactionsTypePercentage[TransactionType.EXPENSE]}
-            icon={
-              <div className="rounded-md bg-red-500 bg-opacity-10 p-2">
-                <TrendingDownIcon size={16} className="text-red-500" />
-              </div>
-            }
-          />
-          <TransactionPercentageItem
-            title="Investments"
-            value={transactionsTypePercentage[TransactionType.INVESTMENT]}
-            icon={
-              <div className="rounded-md bg-white bg-opacity-5 p-2">
-                <PiggyBankIcon size={16} />{" "}
-              </div>
-            }
-          />
-        </div>
-      </CardContent>
+      {hasTransactions && (
+        <CardContent className="flex-1 p-6 pb-0">
+          <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square max-h-[250px]"
+          >
+            <PieChart>
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Pie
+                data={chartData}
+                dataKey="amount"
+                nameKey="type"
+                innerRadius={60}
+              />
+            </PieChart>
+          </ChartContainer>
+
+          <div className="space-y-2">
+            <TransactionPercentageItem
+              title="Income"
+              value={transactionsTypePercentage[TransactionType.DEPOSIT] ?? 0}
+              icon={
+                <div className="rounded-md bg-green-500 bg-opacity-10 p-2">
+                  <TrendingUpIcon size={16} className="text-primary" />
+                </div>
+              }
+            />
+            <TransactionPercentageItem
+              title="Expenses"
+              value={transactionsTypePercentage[TransactionType.EXPENSE] ?? 0}
+              icon={
+                <div className="rounded-md bg-red-500 bg-opacity-10 p-2">
+                  <TrendingDownIcon size={16} className="text-red-500" />
+                </div>
+              }
+            />
+            <TransactionPercentageItem
+              title="Investments"
+              value={
+                transactionsTypePercentage[TransactionType.INVESTMENT] ?? 0
+              }
+              icon={
+                <div className="rounded-md bg-white bg-opacity-5 p-2">
+                  <PiggyBankIcon size={16} />{" "}
+                </div>
+              }
+            />
+          </div>
+        </CardContent>
+      )}
     </Card>
   );
 }

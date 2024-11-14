@@ -38,4 +38,5 @@ export const upsertTransaction = async (params: UpsertTransactionParams) => {
   });
 
   revalidatePath("/transactions");
+  revalidatePath("/");
 };
