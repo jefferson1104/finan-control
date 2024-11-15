@@ -85,6 +85,14 @@ export const PAYMENT_METHOD_OPTIONS = [
     label: TRANSACTION_PAYMENT_METHOD_LABELS[TransactionPaymentMethod.OTHER],
     value: TransactionPaymentMethod.OTHER,
   },
+  {
+    label: TRANSACTION_PAYMENT_METHOD_LABELS[TransactionPaymentMethod.VENMO],
+    value: TransactionPaymentMethod.VENMO,
+  },
+  {
+    label: TRANSACTION_PAYMENT_METHOD_LABELS[TransactionPaymentMethod.ZELLE],
+    value: TransactionPaymentMethod.ZELLE,
+  },
 ];
 
 export const TRANSACTION_CATEGORY_OPTIONS = [
@@ -127,10 +135,29 @@ export const TRANSACTION_CATEGORY_OPTIONS = [
     label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.SALARY],
     value: TransactionCategory.SALARY,
   },
-
   {
     label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.UTILITY],
     value: TransactionCategory.UTILITY,
+  },
+  {
+    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.CREDIT_CARD],
+    value: TransactionCategory.CREDIT_CARD,
+  },
+  {
+    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.CRYPTO],
+    value: TransactionCategory.CRYPTO,
+  },
+  {
+    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.INVESTMENTS],
+    value: TransactionCategory.INVESTMENTS,
+  },
+  {
+    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.LOAN],
+    value: TransactionCategory.LOAN,
+  },
+  {
+    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.TAXES],
+    value: TransactionCategory.TAXES,
   },
 ];
 

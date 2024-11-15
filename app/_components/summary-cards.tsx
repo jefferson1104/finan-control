@@ -26,6 +26,7 @@ export async function SummaryCards({
       <SummaryCard
         title="Balance"
         amount={balance}
+        investedAmount={investmentsTotal}
         size="large"
         isOpacityBackground
         icon={

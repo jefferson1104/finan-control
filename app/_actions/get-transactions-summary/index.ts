@@ -57,7 +57,7 @@ export const getTransactionsSummary = async (month: string) => {
     )._sum.amount,
   );
 
-  const balance = depositsTotal - investmentsTotal - expensesTotal;
+  const balance = depositsTotal - expensesTotal;
 
   const transactionsTypePercentage: TTransactionTypePercentage = {
     [TransactionType.DEPOSIT]: Math.round(
