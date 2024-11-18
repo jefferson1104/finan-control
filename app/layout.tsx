@@ -3,6 +3,7 @@ import { Mulish } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Toaster } from "sonner";
+import NextTopLoader from "nextjs-toploader";
 
 import "./globals.css";
 
@@ -29,9 +30,9 @@ export default function RootLayout({
             baseTheme: dark,
           }}
         >
+          <NextTopLoader color="#55B02E" showSpinner={false} />
           <div className="flex h-full flex-col overflow-hidden">{children}</div>
         </ClerkProvider>
-
         <Toaster />
       </body>
     </html>
