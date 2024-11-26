@@ -41,16 +41,6 @@ export function Navbar() {
           >
             Transactions
           </Link>
-          {/* <Link
-            href="/subscription"
-            className={
-              pathname === "/subscription"
-                ? "font-bold text-primary"
-                : "text-muted-foreground"
-            }
-          >
-            Subscription
-          </Link> */}
         </div>
       </div>
       <UserButton showName />
