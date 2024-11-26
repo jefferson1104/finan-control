@@ -1,7 +1,5 @@
-import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
-import { isMatch } from "date-fns";
-
+import { getUser } from "@/app/_actions/get-user";
+import { getValidMonth } from "@/app/_actions/get-valid-month";
 import { getTransactionsSummary } from "@/app/_actions/get-transactions-summary";
 
 import { Navbar } from "@/app/_components/navbar";
@@ -16,18 +14,9 @@ interface HomeProps {
 }
 
 export default async function Home({ searchParams: { month } }: HomeProps) {
-  // Constants
-  const { userId } = auth();
-  const monthIsInvalid = !month || !isMatch(month, "MM");
-
   // Utils
-  if (!userId) {
-    redirect("/login");
-  }
-  if (monthIsInvalid) {
-    redirect(`/?month=${new Date().getMonth() + 1}`);
-  }
-
+  await getUser();
+  await getValidMonth(month);
   const dashboardData = await getTransactionsSummary(month);
 
   // Renders
