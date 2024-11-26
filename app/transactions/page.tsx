@@ -4,8 +4,9 @@ import { getTransactions } from "@/app/_actions/get-transactions";
 import { Navbar } from "@/app/_components/navbar";
 import { DataTable } from "@/app/_components/ui/data-table";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
-import { transactionColumns } from "@/app/_components/transaction-list";
 import { AddTransactionButton } from "@/app/_components/add-transaction-button";
+
+import { transactionColumns } from "./columns";
 
 export default async function TransactionsPage() {
   // Constants
