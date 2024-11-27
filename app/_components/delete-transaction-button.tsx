@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
+import { toast } from "sonner";
 import { LoaderCircle, TrashIcon } from "lucide-react";
 
-import { deleteTransaction } from "../_actions/delete-transaction";
+import { useTransactions } from "@/app/_contexts/transactions-context";
 
 import { Button } from "@/app/_components/ui/button";
 import {
@@ -16,7 +17,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/app/_components/ui/alert-dialog";
-import { toast } from "sonner";
 
 interface DeleteTransactionButtonProps {
   transactionId: string;
@@ -25,6 +25,9 @@ interface DeleteTransactionButtonProps {
 export function DeleteTransactionButton({
   transactionId,
 }: DeleteTransactionButtonProps) {
+  // Hooks
+  const { deleteTransaction } = useTransactions();
+
   // States
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,7 +35,7 @@ export function DeleteTransactionButton({
   const handleConfirmDelete = async () => {
     try {
       setIsLoading(true);
-      await deleteTransaction({ transactionId });
+      await deleteTransaction(transactionId);
       toast.success("Transaction deleted successfully.");
     } catch (error) {
       console.error("Error deleting transaction:", error);

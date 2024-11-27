@@ -11,7 +11,7 @@ import { db } from "@/app/_lib/prisma";
 
 import { upsertTransactionSchema } from "./schema";
 
-interface UpsertTransactionParams {
+export interface UpsertTransactionParams {
   id?: string;
   name: string;
   amount: number;
@@ -20,6 +20,7 @@ interface UpsertTransactionParams {
   paymentMethod: TransactionPaymentMethod;
   date: Date;
 }
+
 export const upsertTransaction = async (params: UpsertTransactionParams) => {
   upsertTransactionSchema.parse(params);
 

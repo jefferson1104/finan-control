@@ -5,6 +5,8 @@ import { dark } from "@clerk/themes";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
 
+import { TransactionsProvider } from "@/app/_contexts/transactions-context";
+
 import "./globals.css";
 
 const mulish = Mulish({
@@ -30,8 +32,12 @@ export default function RootLayout({
             baseTheme: dark,
           }}
         >
-          <NextTopLoader color="#55B02E" showSpinner={false} />
-          <div className="flex h-full flex-col overflow-hidden">{children}</div>
+          <TransactionsProvider>
+            <NextTopLoader color="#55B02E" showSpinner={false} />
+            <div className="flex h-full flex-col overflow-hidden">
+              {children}
+            </div>
+          </TransactionsProvider>
         </ClerkProvider>
         <Toaster />
       </body>

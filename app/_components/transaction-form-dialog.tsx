@@ -4,14 +4,15 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
+import { toast } from "sonner";
+
+import { useTransactions } from "@/app/_contexts/transactions-context";
 
 import {
   TransactionCategory,
   TransactionPaymentMethod,
   TransactionType,
 } from "@prisma/client";
-
-import { upsertTransaction } from "@/app/_actions/upsert-transaction";
 
 import {
   PAYMENT_METHOD_OPTIONS,
@@ -46,7 +47,6 @@ import {
   DialogFooter,
   DialogHeader,
 } from "@/app/_components/ui/dialog";
-import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }),
@@ -79,6 +79,7 @@ export function TransactionFormDialog({
   transactionId,
 }: TransactionFormDialogProps) {
   // Hooks
+  const { upsertTransaction } = useTransactions();
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues ?? {
