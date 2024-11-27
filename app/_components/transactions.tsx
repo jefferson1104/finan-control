@@ -21,10 +21,11 @@ import { EditTransactionButton } from "@/app/_components/edit-transaction.button
 import { DeleteTransactionButton } from "@/app/_components/delete-transaction-button";
 
 import { useEffect, useState } from "react";
+import { TimeSelect } from "./time-select";
 
 export function Transactions() {
   // Hooks
-  const { transactions } = useTransactions();
+  const { transactions, isFetching } = useTransactions();
 
   // States
   const [searchTerm, setSearchTerm] = useState("");
@@ -116,12 +117,13 @@ export function Transactions() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <TimeSelect />
           <AddTransactionButton />
         </div>
       </div>
       <ScrollArea className="h-full overflow-hidden">
         {/* Loading state */}
-        {transactionList.length < 1 && (
+        {isFetching && (
           <div className="flex items-center justify-center gap-4">
             <p className="animate-pulse text-lg">Loading transactions...</p>
             <LoaderCircle className="size-6 animate-spin font-bold text-primary" />
@@ -129,7 +131,7 @@ export function Transactions() {
         )}
 
         {/* Transactions table */}
-        {transactionList.length > 0 && (
+        {!isFetching && (
           <DataTable columns={transactionColumns} data={transactionList} />
         )}
       </ScrollArea>

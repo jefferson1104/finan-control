@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 import {
   Select,
@@ -28,13 +28,14 @@ export function TimeSelect() {
   // Hooks
   const { push } = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   // Constants
   const currentMonth = searchParams.get("month") || "";
 
   // Methods
   const handleMonthChange = (month: string) => {
-    push(`/?month=${month}`);
+    push(`${pathname}?month=${month}`);
   };
 
   // Renders

@@ -13,10 +13,14 @@ export const getTransactionsSummary = async (month: string) => {
     throw new Error("Unauthorized");
   }
 
+  const currentYear = new Date().getFullYear();
+  const startOfMonth = new Date(currentYear, Number(month) - 1, 1);
+  const endOfMonth = new Date(currentYear, Number(month), 0);
+
   const where = {
     date: {
-      gte: new Date(`2024-${month}-01`),
-      lt: new Date(`2024-${month}-31`),
+      gte: startOfMonth,
+      lt: endOfMonth,
     },
     userId,
   };

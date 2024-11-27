@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
+import { isMatch } from "date-fns";
+
 import { getUser } from "@/app/_actions/get-user";
-import { getValidMonth } from "@/app/_actions/get-valid-month";
 import { getTransactionsSummary } from "@/app/_actions/get-transactions-summary";
 
 import { Navbar } from "@/app/_components/navbar";
@@ -16,7 +18,10 @@ interface HomeProps {
 export default async function Home({ searchParams: { month } }: HomeProps) {
   // Utils
   await getUser();
-  await getValidMonth(month);
+  const monthIsInvalid = !month || !isMatch(month, "MM");
+  if (monthIsInvalid) {
+    redirect(`/?month=${new Date().getMonth() + 1}`);
+  }
   const dashboardData = await getTransactionsSummary(month);
 
   // Renders

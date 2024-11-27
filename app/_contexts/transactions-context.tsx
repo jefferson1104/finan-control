@@ -6,6 +6,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+import { useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { Transaction } from "@prisma/client";
 
@@ -18,6 +19,7 @@ import {
 // Interfaces e tipos
 interface TransactionsContextProps {
   transactions: Transaction[];
+  isFetching: boolean;
   fetchTransactions: () => Promise<void>;
   upsertTransaction: (transaction: UpsertTransactionParams) => Promise<void>;
   deleteTransaction: (transactionId: string) => Promise<void>;
@@ -38,17 +40,37 @@ export const TransactionsProvider = ({
 }: TransactionsProviderProps) => {
   // Hooks
   const { user } = useUser();
+  const searchParams = useSearchParams();
 
   // States
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [isFetching, setIsFetching] = useState(true);
 
   // Constants
   const userId = user?.id;
+  const currentMonth = searchParams.get("month");
 
   // Methods
   const fetchTransactions = async () => {
     try {
-      const response = await fetch(`/api/get-transactions?userId=${userId}`);
+      setIsFetching(true);
+      const response = await fetch(
+        `/api/get-transactions?userId=${userId}&month=${currentMonth}`,
+      );
+      const { transactions } = await response.json();
+      setTransactions(transactions);
+    } catch (error) {
+      console.error("Error fetching transactions", error);
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
+  const updateTransactionsHandler = async () => {
+    try {
+      const response = await fetch(
+        `/api/get-transactions?userId=${userId}&month=${currentMonth}`,
+      );
       const { transactions } = await response.json();
       setTransactions(transactions);
     } catch (error) {
@@ -61,7 +83,7 @@ export const TransactionsProvider = ({
   ) => {
     try {
       await upsertTransaction(transaction);
-      await fetchTransactions();
+      await updateTransactionsHandler();
     } catch (error) {
       console.error("Error to upsert transaction:", error);
     }
@@ -70,7 +92,7 @@ export const TransactionsProvider = ({
   const deleteTransactionHandler = async (transactionId: string) => {
     try {
       await deleteTransaction({ transactionId });
-      await fetchTransactions();
+      await updateTransactionsHandler();
     } catch (error) {
       console.error("Error to delete transaction:", error);
     }
@@ -80,12 +102,13 @@ export const TransactionsProvider = ({
     if (userId) {
       fetchTransactions();
     }
-  }, [userId]);
+  }, [userId, currentMonth]);
 
   return (
     <TransactionsContext.Provider
       value={{
         transactions,
+        isFetching,
         fetchTransactions,
         upsertTransaction: upsertTransactionHandler,
         deleteTransaction: deleteTransactionHandler,
